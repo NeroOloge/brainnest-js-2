@@ -1,0 +1,82 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading #restart {
+  outline: none;
+  border: none;
+  padding: 2% 2%;
+  background-color: rgb(227, 97, 10);
+  color: white;
+  border-radius: 10%;
+  cursor: pointer;
+}
+
+.scores {
+  display: flex;
+  border: 1px solid black;
+  justify-content: space-between;
+  padding: 0 5%;
+}
+
+.scores p {
+  font-weight: bold;
+}
+
+.scores .score {
+  font-weight: normal;
+}
+
+.admonition {
+  margin-top: 3%;
+  text-align: center;
+}
+
+.messages {
+  margin-top: 3%;
+  text-align: center;
+}
+
+#winner {
+  font-weight: bold;
+}
+
+.options {
+  margin-top: 3%;
+  display: flex;
+  justify-content: center;
+}
+
+.options button {
+  margin-right: 4%;
+  outline: none;
+  border: none;
+  padding: 2% 4%;
+  background-color: rgb(10, 169, 227);
+  color: white;
+  border-radius: 10%;
+  cursor: pointer;
+  transition: all 0.8s ease-in;
+}
+
+.options button:hover {
+  background-color: rgb(133, 211, 239);
+  color: gray;
+}
+
+.options button:disabled {
+  background-color: gray;
+  transition: none;
+  cursor: default;
+}
+
+.options button:disabled:hover {
+  background-color: gray;
+  color: white;
+}

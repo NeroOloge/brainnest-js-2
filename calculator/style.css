@@ -1,0 +1,72 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#container {
+  background-color: black;
+  border: 1px solid black;
+  width: 24%;
+  border-radius: 10%;
+  margin: auto;
+}
+
+#display {
+  color: white;
+  margin: auto;
+  width: 90%;
+  height: 35vh;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+#display p {
+  font-size: 2rem;
+}
+
+#buttons {
+  width: 98%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  background-color: rgb(25, 25, 25);
+  margin-bottom: 10%;
+}
+
+#buttons button {
+  font-size: 1.5rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.operator {
+  padding: 20% 0%;
+  color: rgb(50, 50, 236);
+  background: none;
+}
+
+.operand {
+  padding: 20% 0%;
+  color: white;
+  background: none;
+}
+
+#equals {
+  margin: 0 14%;
+  /* margin-left: 2%;
+  margin-right: 2%; */
+  grid-row: span 2 / span 2;
+  background-color: rgb(50, 50, 236);
+  color: white;
+  /* width: 80%; */
+
+  border-radius: 10%;
+  /* margin: auto; */
+}
+
+@media only screen and (max-width: 1024px) {
+  #container {
+    width: 35%;
+  }
+}
