@@ -1,17 +1,14 @@
-// const displayContainer = document.getElementById("display").children[0];
 const firstValueContainer = document.getElementById("first-value");
 const firstOperatorContainer = document.getElementById("first-operator");
 const secondValueContainer = document.getElementById("second-value");
 const buttons = document.getElementById("buttons").children;
-// let display = "";
 let firstValue;
 let secondValue;
 let firstOperator;
 let error = false;
-// let secondOperator;
 
 window.addEventListener("keyup", function (e) {
-  if (e.code.startsWith("Digit") && e.key !== "*") {
+  if (e.code.startsWith("Digit") && e.shiftKey === false) {
     inputValue(e.key);
   } else if (e.key === "-") {
     inputOperator("-");
@@ -62,14 +59,12 @@ function inputValue(value) {
       firstValue += value;
     }
     error = false;
-    // display += value;
   } else if (firstOperator !== undefined) {
     if (secondValue === undefined) {
       secondValue = value;
     } else {
       secondValue += value;
     }
-    // display += value;
   }
   console.log(value);
   updateDisplay();
@@ -97,8 +92,6 @@ function inputOperator(operator) {
       return;
     }
     firstOperator = operator;
-    // display += `${firstOperator}`;
-    // console.log(display);
     updateDisplay();
   } else if (secondValue !== undefined) {
     const tempSolution = operate(
@@ -110,7 +103,6 @@ function inputOperator(operator) {
     secondValue = undefined;
     firstValue = tempSolution;
     firstOperator = operator;
-    // display = `${tempSolution}${operator}`;
     updateDisplay();
   }
 }
@@ -150,7 +142,6 @@ function inputPercent() {
     secondValue = undefined;
     firstValue = tempSolution;
     firstOperator = undefined;
-    // display = `${tempSolution}${operator}`;
     updateDisplay();
   }
 }
@@ -189,7 +180,6 @@ function clearCurrentHistory() {
   firstValue = undefined;
   secondValue = undefined;
   firstOperator = undefined;
-  // secondOperator = undefined;
 }
 
 function displayError() {
@@ -201,14 +191,12 @@ function displayError() {
 }
 
 function clearDisplay() {
-  // display = "";
   clearCurrentHistory();
   updateDisplay();
   error = false;
 }
 
 function updateDisplay() {
-  // displayContainer.textContent = display;
   firstOperatorContainer.textContent =
     firstOperator !== undefined ? firstOperator : "";
   firstValueContainer.textContent = firstValue !== undefined ? firstValue : "";
@@ -230,23 +218,39 @@ function equals() {
     parseFloat(secondValue)
   );
   if (error) return;
-  // clearCurrentHistory();
-  // display = solution;
   firstValue = solution;
   secondValue = undefined;
   firstOperator = undefined;
   updateDisplay();
-  // display = "";
 }
 
 function sanitizeOutput(output) {
+  // convert number to precision string of 9 s.f.
+  // and split all characters into array
   const outputValue = output.toPrecision(9).split("");
-  // console.log(outputValue.split(""));
-  for (let i = outputValue.length - 1; i >= 0; i--) {
-    if (outputValue[i] == 0) outputValue.splice(i, 1);
+  // if value includes e, i.e: exponent
+  if (outputValue.includes("e")) {
+    let [value, exp] = outputValue.join("").split("e");
+    // remove zeroes from value
+    // function `removeInSignificantZeroes` works with arrays
+    // so value has to be split
+    value = removeInSignificantZeroes(value.split(""));
+    // then join value into string and combine with exp
+    return `${value.join("")}e${exp}`;
+  }
+  // if value is whole number return
+  if (!outputValue.includes(".")) return outputValue.join("");
+  // remove insignificant zeroes from decimal value
+  removeInSignificantZeroes(outputValue);
+  return outputValue.join("");
+}
+
+// removes extra zeroes from value which is a splitted string
+function removeInSignificantZeroes(value) {
+  for (let i = value.length - 1; i >= 0; i--) {
+    if (value[i] == 0) value.splice(i, 1);
     else break;
   }
-  if (outputValue[outputValue.length - 1] === ".")
-    outputValue.splice(outputValue.length - 1, 1);
-  return outputValue.join("");
+  if (value[value.length - 1] === ".") value.splice(value.length - 1, 1);
+  return value;
 }
