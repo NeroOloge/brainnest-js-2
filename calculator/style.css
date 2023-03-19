@@ -21,7 +21,13 @@ body {
 }
 
 #display p {
+  width: 100%;
+  text-align: right;
   font-size: 2rem;
+}
+
+#display p span {
+  word-wrap: break-word;
 }
 
 #buttons {
