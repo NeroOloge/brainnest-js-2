@@ -66,7 +66,6 @@ function inputValue(value) {
       secondValue += value;
     }
   }
-  console.log(value);
   updateDisplay();
 }
 
@@ -108,7 +107,6 @@ function inputOperator(operator) {
 }
 
 function inputDot() {
-  console.log(".");
   if (firstOperator === undefined) {
     if (firstValue === undefined) firstValue = "0.";
     else {
@@ -126,7 +124,6 @@ function inputDot() {
 }
 
 function inputPercent() {
-  console.log("%");
   if (secondValue === undefined && firstOperator === undefined) {
     if (firstValue !== undefined && !isNaN(parseFloat(firstValue))) {
       firstValue = firstValue / 100;
@@ -147,14 +144,12 @@ function inputPercent() {
 }
 
 function backspace() {
-  console.log("back");
   if (secondValue !== undefined) {
     secondValue = secondValue.slice(0, secondValue.length - 1);
     if (secondValue === "") secondValue = undefined;
   } else if (firstOperator !== undefined) {
     firstOperator = undefined;
   } else if (firstValue !== undefined) {
-    console.log(firstValue);
     firstValue = firstValue.slice(0, firstValue.length - 1);
     if (firstValue === "") firstValue = undefined;
   }
