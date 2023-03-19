@@ -179,10 +179,10 @@ function clearCurrentHistory() {
 
 function displayError() {
   clearCurrentHistory();
-  firstOperator = "Error can't divide by 0";
+  firstValue = "Error can't divide by 0";
   error = true;
   updateDisplay();
-  firstOperator = undefined;
+  firstValue = undefined;
 }
 
 function clearDisplay() {
